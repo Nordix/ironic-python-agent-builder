@@ -77,7 +77,19 @@ else
         -path './usr/share/misc/m*' -prune -o \
         -path './usr/src/kernels/*' -prune -o \
         -path './var/cache/*' -prune -o \
+        -path './var/lib/dnf/*' -prune -o \
         -path './var/log/*' -prune -o \
+        -path './usr/lib/sysimage/rpm/*' -prune -o \
+        -path './usr/share/anaconda/*' -prune -o \
+        -path './usr/share/bash-completion/*' -prune -o \
+        -path './usr/share/cockpit/*' -prune -o \
+        -path './usr/share/cracklib/*' -prune -o \
+        -path './usr/share/fonts/*' -prune -o \
+        -path './usr/share/hunspell/*' -prune -o \
+        -path './usr/share/hwdata/iab.txt' -prune -o \
+        -path './usr/share/hwdata/oui.txt' -prune -o \
+        -path './usr/share/X11/*' -prune -o \
+        -path './usr/share/zsh/*' -prune -o \
         -name '*.pyc' ! -path '*encodings/*' -prune -o \
         -name '*.pyo' -prune -o \
         -print | sudo cpio -o -H newc | ${DIB_IPA_COMPRESS_CMD} > ${IMAGE_PATH}.initramfs
