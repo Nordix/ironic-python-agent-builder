@@ -1,4 +1,4 @@
-export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-communication,ti-keystone,ueagle-atm,rsi,mrvl,brcm,mediatek,ath10k,rtlwifi,rtw88,rtw89,libertas,ath11k,mellanox/mlxsw_spectrum,s5p-mfc,ti/tas2781,ti-connectivity,TAS,ath3k,ath6k,ath9k,ath12k,rtl_bt,v4l,cirrus,dvb,mwl8k,mwlwifi,cypress,atmel,vicam,iwlwifi,intel/ibt,intel/dsp}
+export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-communication,ti-keystone,ueagle-atm,rsi,mrvl,brcm,mediatek,ath10k,rtlwifi,rtw88,rtw89,libertas,ath11k,mellanox/mlxsw_spectrum,s5p-mfc,ti/tas2781,ti-connectivity,TAS,ath3k,ath6k,ath9k,ath12k,rtl_bt,v4l,cirrus,dvb,mwl8k,mwlwifi,cypress,atmel,vicam,iwlwifi,intel/ibt,intel/dsp,nvidia,i915,xe,radeon,amdnpu,amlogic,LENOVO,intel/iwlwifi}
 
 # NOTE(TheJulia): List of what each item represents for future context
 # amdgpu == AMD/ATI Radeon/Vega/Raven firmware for drivers
@@ -35,6 +35,14 @@ export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-commu
 # cypress == Broadcom Wireless
 # atmel == Atmel wireless
 # vicam == Intel wireless
-# iwlwifi == Intel wireless adapters
+# iwlwifi == Intel wireless adapters (top-level /usr/lib/firmware/iwlwifi)
+# intel/iwlwifi == Intel wireless adapters (under /usr/lib/firmware/intel/iwlwifi)
 # intel/ibt == Intel bluetooth
 # intel/dsp == Intel audio dsp
+# nvidia == NVIDIA GPU firmware
+# i915 == Intel integrated GPU firmware
+# xe == Intel Xe GPU firmware
+# radeon == AMD Radeon GPU firmware
+# amdnpu == AMD NPU (AI accelerator) firmware
+# amlogic == Amlogic ARM SoC firmware (consumer devices, not servers)
+# LENOVO == Lenovo laptop-specific firmware
