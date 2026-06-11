@@ -79,19 +79,29 @@ tuned:
 
 # Unnecessary packages to remove. We run all removals in pre-install phase, to
 # avoid breaking installs that happen in install phase.
-git:
-    phase: pre-install.d
-    uninstall: true
 man-db:
     phase: pre-install.d
     uninstall: true
+# NOTE: git and rsync are removed in post-install.d because they can be
+# reinstalled as transitive dependencies during the install phase.
+git:
+    phase: post-install.d
+    uninstall: true
 rsync:
-    phase: pre-install.d
+    phase: post-install.d
     uninstall: true
 
 # Distro-specific uninstalls
+cockpit:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
 kernel-debug-devel:
     phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+microcode_ctl:
+    phase: post-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
 mozjs60:
@@ -108,6 +118,14 @@ python3-cairo:
     when: IPA_DISTRO_FAMILY = rh
 python3-gobject-base:
     phase: pre-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+samba-client-libs:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+sssd-common:
+    phase: post-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
 yum:
