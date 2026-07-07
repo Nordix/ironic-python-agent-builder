@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Fixes a delay of up to 30 seconds during boot when a node is deployed via
+    virtual media without a configuration drive. The configuration drive
+    resolution script now detects the Ironic boot device by its publisher id
+    and, when that device has no ``config-2`` label, concludes immediately
+    that no configuration drive is present instead of polling for the full
+    timeout. A stale ``config-2`` partition left on a local disk no longer
+    stalls boot.

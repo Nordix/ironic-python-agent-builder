@@ -51,6 +51,22 @@ while [ $i -lt 30 ] ; do
         fi
     done
 
+    # Bug #2155910: ir_pub_id only ever rides on the Ironic boot ISO, whose
+    # label and publisher id are probed together. If we can see that device and
+    # it is not labelled config-2, no config drive was supplied - stop now
+    # instead of looping the full timeout (e.g. for a stale local config-2).
+    if [ -n "${publisher_id}" ]; then
+        for device in $(lsblk -o PATH,LABEL | grep -v "$CONFIG_DRIVE_LABEL" | cut -d" " -f1); do
+            device_id=$(udevadm info --query=property --property=ID_FS_PUBLISHER_ID "$device" 2>/dev/null | sed s/ID_FS_PUBLISHER_ID=// || true)
+            [ -n "${device_id}" ] || continue
+            if [[ "${publisher_id,,}" == "${device_id,,}" ]]; then
+                echo "Found the Ironic boot device ${device} (publisher id ${publisher_id}) without a ${CONFIG_DRIVE_LABEL} label. No configuration drive was supplied - skipping configuration."
+                lsblk -o PATH,LABEL
+                exit 1
+            fi
+        done
+    fi
+
     sleep 1
 done
 
