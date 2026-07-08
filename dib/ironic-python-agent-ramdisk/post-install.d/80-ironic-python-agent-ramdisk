@@ -40,8 +40,18 @@ case "$DIB_INIT_SYSTEM" in
         # anything during runtime.
         if [[ ${IPA_DISTRO_FAMILY} == 'rh' ]]; then
             if [[ ${YUM} == 'dnf' ]]; then
-                systemctl disable dnf-makecache.service
-                systemctl disable dnf-makecache.timer
+                # Mask rather than disable: dnf-makecache.service has no
+                # [Install] section so disable is a no-op; masking prevents
+                # activation via any path including direct timer invocation.
+                systemctl mask dnf-makecache.service
+                systemctl mask dnf-makecache.timer
+            fi
+            # fwupd-refresh fetches firmware metadata from the internet.
+            # fwupd cannot be uninstalled due to a shim-x64 dependency chain,
+            # so mask both units to prevent activation in the ramdisk.
+            if systemctl cat fwupd-refresh.service &>/dev/null; then
+                systemctl mask fwupd-refresh.service
+                systemctl mask fwupd-refresh.timer
             fi
         fi
 
