@@ -100,6 +100,22 @@ kernel-debug-devel:
     phase: pre-install.d
     uninstall: true
     when: IPA_DISTRO_FAMILY = rh
+kernel-debug-core:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+kernel-debug-modules:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+kernel-debug-modules-core:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
+kernel-debug-modules-extra:
+    phase: post-install.d
+    uninstall: true
+    when: IPA_DISTRO_FAMILY = rh
 microcode_ctl:
     phase: post-install.d
     uninstall: true
