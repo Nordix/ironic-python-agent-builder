@@ -6,28 +6,11 @@ Builds a ramdisk with ironic-python-agent.
 More information can be found at:
 https://docs.openstack.org/ironic-python-agent/latest/
 
-Beyond installing the ironic-python-agent, this element does the following:
+This element extends the minimal element ``ironic-python-agent-ramdisk-base``
+with the following:
 
 * Installs the ``dhcp-all-interfaces`` so the node, upon booting, attempts to
   obtain an IP address on all available network interfaces.
-* Disables the ``iptables`` service on SysV and systemd based systems.
-* Disables the ``ufw`` service on Upstart based systems.
-* Installs packages required for the operation of the ironic-python-agent::
-    ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux`` ``genisoimage``
-* When installing from source, ``python-dev`` and ``gcc`` are also installed
-  in order to support source based installation of ironic-python-agent and its
-  dependencies.
-* Install the certificate if any, which is set to the environment variable
-  ``DIB_IPA_CERT`` for validating the authenticity by ironic-python-agent. The
-  certificate can be self-signed certificate or CA certificate.
-* Compresses initramfs with command specified in environment variable
-  ``DIB_IPA_COMPRESS_CMD``, which is 'gzip' by default. This command should
-  listen for raw data from stdin and write compressed data to stdout. Command
-  can be with arguments.
-* Configures rescue mode if ``DIB_IPA_ENABLE_RESCUE`` is not set to ``false``.
-* By default, sets a maximum size for the ramdisk systemd journal to 15M. This
-  can be disabled by setting ``DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE`` to any
-  value which is not ``False``.
 
 This element outputs three files:
 
