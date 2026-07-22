@@ -3,6 +3,15 @@
 # Ensure the directory exists
 sudo mkdir -p $(dirname $IPA_CONFFILE)
 
+# Accept a space separated value from the operator, write it out comma
+# separated for the agent's list-valued options.
+normalize_list() {
+    echo "$1" | tr -s '[:space:]' ',' | sed -e 's/^,//' -e 's/,$//'
+}
+
+PULL_OPTIONS="$(normalize_list "$PULL_OPTIONS")"
+RUN_OPTIONS="$(normalize_list "$RUN_OPTIONS")"
+
 # Write the configuration inside the ramdisk
 cat <<EOF | sudo tee $IPA_CONFFILE
 [container]

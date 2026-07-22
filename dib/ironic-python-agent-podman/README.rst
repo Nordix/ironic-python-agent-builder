@@ -32,14 +32,14 @@ ironic-python-agent-config
   - **Default:** ``podman``
 
 **pull_options**
-  - **Description:** Container pull options (e.g., --tls-verify=false).
+  - **Description:** Container pull options, comma separated (ex "--tls-verify=false"). A space separated value is accepted and converted.
   - **Environment Variable:** ``DIB_PULL_OPTIONS``
   - **Default:** ``--tls-verify=false``
 
 **run_options**
-  - **Description:** Options passed when running the container (e.g., --rm --network=host).
+  - **Description:** Options passed when running the container, comma separated (ex "--rm,--network=host"). A space separated value is accepted and converted.
   - **Environment Variable:** ``DIB_RUN_OPTIONS``
-  - **Default:** ``--rm --network=host --tls-verify=false``
+  - **Default:** ``--rm,--network=host,--tls-verify=false``
 
 ironic-python-agent-podman
 --------------------------
@@ -128,14 +128,14 @@ ironic-python-agent-config
   - **Default:** ``podman``
 
 **pull_options**
-  - **Description:** Container pull options (e.g., --tls-verify=false).
+  - **Description:** Container pull options, comma separated (ex "--tls-verify=false"). A space separated value is accepted and converted.
   - **Environment Variable:** ``DIB_PULL_OPTIONS``
   - **Default:** ``--tls-verify=false``
 
 **run_options**
-  - **Description:** Options passed when running the container (e.g., --rm --network=host).
+  - **Description:** Options passed when running the container, comma separated (ex "--rm,--network=host"). A space separated value is accepted and converted.
   - **Environment Variable:** ``DIB_RUN_OPTIONS``
-  - **Default:** ``--rm --network=host --tls-verify=false``
+  - **Default:** ``--rm,--network=host,--tls-verify=false``
 
 ironic-python-agent-podman
 --------------------------

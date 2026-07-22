@@ -11,8 +11,10 @@ export ALLOW_ARBITRARY_CONTAINERS="${DIB_ALLOW_ARBITRARY_CONTAINERS:-false}"
 export ALLOWED_CONTAINERS="${DIB_ALLOWED_CONTAINERS:-""}"
 export CONTAINER_STEPS_FILE="${DIB_CONTAINER_STEPS_FILE:-/etc/ironic-python-agent.d/mysteps.yaml}"
 export RUNNER="${DIB_RUNNER:-podman}"
+# NOTE(cid): these are list-valued in the agent, and lists split on commas,
+# not whitespace. A space separated value reaches the runtime as one argument.
 export PULL_OPTIONS="${DIB_PULL_OPTIONS:---tls-verify=false}"
-export RUN_OPTIONS="${DIB_RUN_OPTIONS:---rm --network=host --tls-verify=false}"
+export RUN_OPTIONS="${DIB_RUN_OPTIONS:---rm,--network=host,--tls-verify=false}"
 
 # Steps Config
 STEPS_INSIDEDIR=/etc/ironic-python-agent.d

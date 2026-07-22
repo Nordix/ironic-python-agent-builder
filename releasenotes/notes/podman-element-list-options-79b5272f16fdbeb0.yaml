@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    The ``ironic-python-agent-podman`` element now writes ``pull_options``
+    and ``run_options`` into the ramdisk configuration as comma separated
+    lists. These are list valued options in the agent, and lists split on
+    commas rather than whitespace, so the previous space separated defaults
+    reached the container runtime as a single argument and every container
+    step failed. A space separated ``DIB_PULL_OPTIONS`` or
+    ``DIB_RUN_OPTIONS`` supplied at build time is converted automatically.
