@@ -77,6 +77,15 @@ for example:
     disk-image-create -o ironic-python-agent \
         ironic-python-agent-ramdisk centos
 
+To build a minimal image without additional elements such as
+``dhcp-all-interfaces``, use ``ironic-python-agent-ramdisk-base`` instead:
+
+.. code-block:: shell
+
+    export DIB_RELEASE=9-stream
+    disk-image-create -o ironic-python-agent \
+        ironic-python-agent-ramdisk-base centos
+
 To use a specific branch of ironic-python-agent, use:
 
 .. code-block:: bash
@@ -217,22 +226,20 @@ doing a source-based installation:
   install when ``DIB_IPA_HARDWARE_PACKAGE`` is unset. If unset, the latest
   version will be installed.
 
-ironic-python-agent-ramdisk
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ironic-python-agent-ramdisk-base
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Builds a ramdisk with ironic-python-agent.
+Builds a minimal ramdisk with ironic-python-agent.
 
 More information can be found at:
 https://docs.openstack.org/ironic-python-agent/latest/
 
 Beyond installing the ironic-python-agent, this element does the following:
 
-* Installs the ``dhcp-all-interfaces`` so the node, upon booting, attempts to
-  obtain an IP address on all available network interfaces.
 * Disables the ``iptables`` service on SysV and systemd based systems.
 * Disables the ``ufw`` service on Upstart based systems.
 * Installs packages required for the operation of the ironic-python-agent::
-  ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux``
+  ``qemu-utils`` ``parted`` ``hdparm`` ``util-linux`` ``genisoimage``
 * When installing from source, ``python-dev`` and ``gcc`` are also installed
   in order to support source based installation of ironic-python-agent and its
   dependencies.
@@ -244,6 +251,9 @@ Beyond installing the ironic-python-agent, this element does the following:
   listen for raw data from stdin and write compressed data to stdout. Command
   can be with arguments.
 * Configures rescue mode if ``DIB_IPA_ENABLE_RESCUE`` is not set to ``false``.
+* By default, sets a maximum size for the ramdisk systemd journal to 15M. This
+  can be disabled by setting ``DIB_IPA_DISABLE_JOURNAL_MAX_LOG_SIZE`` to any
+  value which is not ``False``.
 
 This element outputs two files:
 
@@ -258,6 +268,18 @@ This element outputs two files:
 
 .. note::
    Using the ramdisk will require at least 1.5GB of ram
+
+ironic-python-agent-ramdisk
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Extends ``ironic-python-agent-ramdisk-base`` with the following:
+
+* Installs the ``dhcp-all-interfaces`` element so the node, upon booting,
+  attempts to obtain an IP address on all available network interfaces.
+
+Use this element for the default IPA ramdisk build. Use
+``ironic-python-agent-ramdisk-base`` instead if you want a minimal image
+and will provide your own network configuration.
 
 ironic-python-agent-tls
 ~~~~~~~~~~~~~~~~~~~~~~~

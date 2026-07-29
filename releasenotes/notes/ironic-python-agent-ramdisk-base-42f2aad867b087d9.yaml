@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    The ``ironic-python-agent-ramdisk`` element has been split into a base
+    element and a full element. ``ironic-python-agent-ramdisk-base`` builds a
+    minimal ramdisk, and ``ironic-python-agent-ramdisk`` extends it with
+    additional functionality such as dhcp-all-interfaces.

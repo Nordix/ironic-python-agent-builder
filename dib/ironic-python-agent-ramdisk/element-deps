@@ -1,11 +1,2 @@
-epel
-ironic-ramdisk-base
+ironic-python-agent-ramdisk-base
 dhcp-all-interfaces
-ibft-interfaces
-install-static
-package-installs
-ensure-venv
-pkg-map
-source-repositories
-svc-map
-simple-init
