@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Fixes an issue where networking fails with Centos 9 based image in IPv6
+    only deployment when user does not provide explicit network configuration.
+    By default Glean falls back into DHCP, but by doing so it also disables
+    DHCPv6 completely. Disabling Glean DHCP fallback makes the created image to
+    use NetworkManager defaults, which has DHCPv4 and DHCPv6 both enabled.
