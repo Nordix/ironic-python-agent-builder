@@ -46,3 +46,8 @@ export IPA_REMOVE_FIRMWARE=${IPA_REMOVE_FIRMWARE:-amdgpu,netronome,qcom,ti-commu
 # amdnpu == AMD NPU (AI accelerator) firmware
 # amlogic == Amlogic ARM SoC firmware (consumer devices, not servers)
 # LENOVO == Lenovo laptop-specific firmware
+
+# Disable the DHCP fallback by default to fix DHCPv6 not being used in Centos 9, see
+# https://bugs.launchpad.net/ironic-python-agent-builder/+bug/2161947
+# for context.
+export DIB_SIMPLE_INIT_NO_DHCP_FALLBACK=${DIB_SIMPLE_INIT_NO_DHCP_FALLBACK:-1}
